@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/jmoiron/sqlx"
+	"database/sql"
 )
 
 type Weather interface {
@@ -10,10 +10,10 @@ type Weather interface {
 
 type Repository struct {
 	Weather
-	db *sqlx.DB
+	db *sql.DB
 }
 
-func NewRepository(db *sqlx.DB) *Repository {
+func NewRepository(db *sql.DB) *Repository {
 	return &Repository{
 		db: db,
 	}

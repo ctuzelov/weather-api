@@ -36,22 +36,22 @@ run:
 	go run cmd/weather/main.go
 
 postgres:
-	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=123 -d postgres:12-alpine
+	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=123 -d postgres:12-alpine
 
 createdb:
-	docker exec -it postgres12 createdb --username=root --owner=root weather
+	docker exec -it postgres12 createdb --username=postgres --owner=postgres postgres
 
 dropdb:
-	docker exec -it postgres12 dropdb ozinshe
+	docker exec -it postgres12 dropdb weather
 
 migrateup:
-	migrate -database 'postgresql://root:123@localhost:5432/weather?sslmode=disable' -path scheme up
+	migrate -database 'postgresql://postgres:123@localhost:5432/postgres?sslmode=disable' -path scheme/migrations up
 
 migratedown:
-	migrate -database 'postgresql://root:123@localhost:5432/weather?sslmode=disable' -path scheme down
+	migrate -database 'postgresql://postgres:123@localhost:5432/postgres?sslmode=disable' -path scheme/migrations down
 
 fixdirty:
-	migrate -database 'postgresql://root:123@localhost:5432/weather?sslmode=disable' -path migrations force 1 
+	migrate -database 'postgresql://postgres:123@localhost:5432/postgres?sslmode=disable' -path scheme/migrations force 1 
 
 psql:
-	docker exec -it postgres12  psql -U root -d weather
+	docker exec -it postgres12  psql -U root -d postgres

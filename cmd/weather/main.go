@@ -13,16 +13,16 @@ func main() {
 	l, _ := zap.NewProduction()
 
 	cfg := &config.Config{
-		L:              l,
-		AppMode:        config.LocalAppMode,
-		GRPCAddr:       ":9000",
-		HTTPAddr:       ":8002",
-		PgPort:         "5432",
-		PgHost:         "localhost",
-		PgName:         "weather",
-		PgUser:         "root",
-		PgPassword:     "123",
-		PgPingEnabled:  true,
+		L:       l,
+		AppMode: config.LocalAppMode,
+		// GRPCAddr:       ":9003",
+		// HTTPAddr:       ":8003",
+		PgPort: "5432",
+		// PgHost:         "localhost",
+		// PgName:         "postgres",
+		// PgUser:         "postgres",
+		// PgPassword:     "123",
+		// PgPingEnabled:  true,
 		PgPingInterval: time.Second * 60,
 	}
 

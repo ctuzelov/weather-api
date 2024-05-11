@@ -22,7 +22,7 @@ func New(cfg *config.Config) error {
 
 	dbClient, err := db.NewClient(cfg)
 	if err != nil {
-		cfg.L.Fatal("not connected to db", zap.Error(err))
+		cfg.L.Fatal("error with db", zap.Error(err))
 	}
 
 	lis, err := net.Listen("tcp", cfg.GRPCAddr)
